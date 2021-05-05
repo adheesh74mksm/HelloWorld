@@ -79,17 +79,17 @@
 
         // tanpura controls
         const tanPlayerB = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/HelloWorld/B.mp3",
+			url: "https://adheesh74mksm.github.io/HelloWorld/B.wav",
 			loop: true
         }).toDestination();
 
         const tanPlayerGs = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/HelloWorld/Gs.mp3",
+			url: "https://adheesh74mksm.github.io/HelloWorld/Gs.wav",
 			loop: true
         }).toDestination();
 
         const tanPlayerCs = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/HelloWorld/Cs.mp3",
+			url: "https://adheesh74mksm.github.io/HelloWorld/Cs.wav",
 			loop: true
         }).toDestination();
 
@@ -110,7 +110,7 @@
         document.querySelector("#bpm").value = Tone.Transport.bpm.value;
 
         // metronome play controls
-        const metPlayer = new Tone.Player("https://adheesh74mksm.github.io/HelloWorld/beat.mp3")
+        const metPlayer = new Tone.Player("https://adheesh74mksm.github.io/HelloWorld/beat.wav")
         .toDestination();
 
         Tone.Transport.scheduleRepeat((time) => {
