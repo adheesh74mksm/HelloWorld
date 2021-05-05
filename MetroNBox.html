@@ -46,7 +46,7 @@
                     </table> <br><br>
 
                     <span>Volume</span><br>
-                    <input type="range" id="tanVol" min="-5" max="-1" step="1"><br>
+                    <input type="range" id="tanVol" min="-10" max="-1" step="1"><br>
                     <output id=tanVolDisplay name="tanVolDisplay" for="tanVol"></output> 
                     
                   </td>
@@ -60,7 +60,7 @@
 
 
                     <span>Volume</span><br>
-                    <input type="range" id="metVol" min="-5" max="-1" step="1"><br>
+                    <input type="range" id="metVol" min="-10" max="-1" step="1"><br>
                     <output id=metVolDisplay name="metVolDisplay" for="metVol"></output> 
 
                   </td>
@@ -95,11 +95,11 @@
 
         var tanPlayer = tanPlayerB;
 
-        tanPlayer.volume.value = -3
+        tanPlayer.volume.value = -6
         document.querySelector("#tanVol").addEventListener("input", e => {tanPlayer.volume.value = document.getElementById("tanVol").value;
-        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 6).toFixed(0);});
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 11).toFixed(0);});
         document.querySelector("#tanVol").value = tanPlayer.volume.value;
-        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 6).toFixed(0);
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 11).toFixed(0);
 
         initTanPlayPause("playTanpura");
         
@@ -119,11 +119,11 @@
 		
         initPlayPause("playMetronome",Tone.Transport);
          // metronome volume controls
-        metPlayer.volume.value = -3
+        metPlayer.volume.value = -6
         document.querySelector("#metVol").addEventListener("input", e => {metPlayer.volume.value = document.getElementById("metVol").value;
-        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 6).toFixed(0);});
+        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 11).toFixed(0);});
         document.querySelector("#metVol").value = metPlayer.volume.value;
-        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 6).toFixed(0);
+        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 11).toFixed(0);
         
 
         
