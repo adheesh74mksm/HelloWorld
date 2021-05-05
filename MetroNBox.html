@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        th, td {
+          border: 1px solid black;
+          padding: 15px;
+          text-align: center;
+        }
+        
+        table {
+          width: 80%;
+          border-collapse: collapse;
+          border: 1px solid black;
+          margin-left:auto; 
+          margin-right:auto;
+        }
+        </style>
+  <meta charset="utf-8">
+	<title>MetroNBox</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<script src="https://tonejs.github.io/build/Tone.js"></script>
+</head>
+<body>
+	
+		<div id="xyz">
+            <table>
+                <tr>
+                  <th >Instrument</th>
+                  <th>Play/Stop</th>
+                  <th >Controls</th>
+                </tr>
+                <tr>
+                  <td>Play Tanpura</td>
+                  <td ><button id="playTanpura" class="isPaused">Play</button></td>
+                  <td >
+                    <span>Select pitch</span>
+                    <table>
+                      <tr>
+                        <th><input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
+                        <th ><input type="radio" name="pitch" value="B" onclick="handlePitch(this);" checked>B</th>
+                        <th ><input type="radio" name="pitch" value="Cs" onclick="handlePitch(this);" >C#</th>
+                      </tr>
+                    </table> <br><br>
+
+                    <span>Volume</span><br>
+                    <input type="range" id="tanVol" min="-15" max="-11" step="1"><br>
+                    <output id=tanVolDisplay name="tanVolDisplay" for="tanVol"></output> 
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>Play Metronome</td>
+                  <td ><button id="playMetronome" class="isPaused">Play</button></td>
+                  <td >
+                    <span>Select speed</span>
+                    <input type="number" id="bpm" min="10" max="350" step="1"><br><br><br>
+
+
+                    <span>Volume</span><br>
+                    <input type="range" id="metVol" min="-5" max="-1" step="1"><br>
+                    <output id=metVolDisplay name="metVolDisplay" for="metVol"></output> 
+
+                  </td>
+                </tr>
+              </table>
+
+
+           
+            
+			<!--tone-step-sequencer></tone-step-sequencer-->
+		</div>
+	
+
+
+	<script type="text/javascript">
+
+        // tanpura controls
+        const tanPlayerB = new Tone.Player({
+			url: "https://freesound.org/data/previews/562/562771_12630036-lq.mp3",
+			loop: true
+        }).toDestination();
+
+        const tanPlayerGs = new Tone.Player({
+			url: "https://freesound.org/data/previews/563/563316_12630036-lq.mp3",
+			loop: true
+        }).toDestination();
+
+        const tanPlayerCs = new Tone.Player({
+			url: "https://freesound.org/data/previews/563/563317_12630036-lq.mp3",
+			loop: true
+        }).toDestination();
+
+        var tanPlayer = tanPlayerB;
+
+        tanPlayer.volume.value = -13
+        document.querySelector("#tanVol").addEventListener("input", e => {tanPlayer.volume.value = document.getElementById("tanVol").value;
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 16).toFixed(0);});
+        document.querySelector("#tanVol").value = tanPlayer.volume.value;
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 16).toFixed(0);
+
+        initTanPlayPause("playTanpura");
+        
+        //metronome bpm controls
+        Tone.Transport.bpm.value = 100;
+        document.querySelector("#bpm").addEventListener("input", e => {
+        Tone.Transport.bpm.value = document.getElementById("bpm").value});
+        document.querySelector("#bpm").value = Tone.Transport.bpm.value;
+
+        // metronome play controls
+        const metPlayer = new Tone.Player("https://freesound.org/data/previews/268/268822_4486188-lq.mp3")
+        .toDestination();
+
+        Tone.Transport.scheduleRepeat((time) => {
+            metPlayer.start(time);
+        }, "4n");
+		
+        initPlayPause("playMetronome",Tone.Transport);
+         // metronome volume controls
+        metPlayer.volume.value = -3
+        document.querySelector("#metVol").addEventListener("input", e => {metPlayer.volume.value = document.getElementById("metVol").value;
+        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 6).toFixed(0);});
+        document.querySelector("#metVol").value = metPlayer.volume.value;
+        document.querySelector("#metVolDisplay").value = (metPlayer.volume.value + 6).toFixed(0);
+        
+
+        
+        // Utils
+        function initPlayPause(buttonName,player){
+            document.getElementById(buttonName).addEventListener("click", e => {
+            buttonClicked = e.srcElement;
+            if(buttonClicked.className == 'isPlaying'){
+                buttonClicked.className = "isPaused";
+                buttonClicked.innerHTML = "Play";
+                player.stop();
+            } else if(buttonClicked.className == 'isPaused'){
+                buttonClicked.className = "isPlaying";
+                buttonClicked.innerHTML = "Pause";
+                Tone.start();
+                player.start();
+            }
+        });
+        }
+
+                // Utils
+        function initTanPlayPause(buttonName){
+            document.getElementById(buttonName).addEventListener("click", e => {
+            buttonClicked = e.srcElement;
+            if(buttonClicked.className == 'isPlaying'){
+                buttonClicked.className = "isPaused";
+                buttonClicked.innerHTML = "Play";
+                tanPlayer.stop("+1.2");
+                tanPlayer.volume.rampTo(-Infinity, 3);
+            } else if(buttonClicked.className == 'isPaused'){
+                buttonClicked.className = "isPlaying";
+                buttonClicked.innerHTML = "Pause";
+                Tone.start();
+                tanPlayer.start();
+                tanPlayer.volume.rampTo(document.getElementById("tanVol").value,1);
+            }
+        });
+        }
+
+        function handlePitch(pitch){
+          tanPlayer.stop();
+          switch(pitch.value) {
+            case "B" : 
+            tanPlayer = tanPlayerB;
+            break;
+            case "Gs" : 
+            tanPlayer = tanPlayerGs;
+            break;            
+            case "Cs" : 
+            tanPlayer = tanPlayerCs;
+            break;           
+            default:
+            tanPlayer = tanPlayerB;
+          }
+          tanPlayer.volume.value = document.getElementById("tanVol").value;
+          if(document.getElementById("playTanpura").className == "isPlaying"){
+            tanPlayer.start();
+          }
+        }
+	</script>
+</body>
+</html>
