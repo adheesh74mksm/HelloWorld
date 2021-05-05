@@ -46,7 +46,7 @@
                     </table> <br><br>
 
                     <span>Volume</span><br>
-                    <input type="range" id="tanVol" min="-15" max="-11" step="1"><br>
+                    <input type="range" id="tanVol" min="-8" max="-4" step="1"><br>
                     <output id=tanVolDisplay name="tanVolDisplay" for="tanVol"></output> 
                     
                   </td>
@@ -95,11 +95,11 @@
 
         var tanPlayer = tanPlayerB;
 
-        tanPlayer.volume.value = -13
+        tanPlayer.volume.value = -6
         document.querySelector("#tanVol").addEventListener("input", e => {tanPlayer.volume.value = document.getElementById("tanVol").value;
-        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 16).toFixed(0);});
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 9).toFixed(0);});
         document.querySelector("#tanVol").value = tanPlayer.volume.value;
-        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 16).toFixed(0);
+        document.querySelector("#tanVolDisplay").value = (tanPlayer.volume.value + 9).toFixed(0);
 
         initTanPlayPause("playTanpura");
         
