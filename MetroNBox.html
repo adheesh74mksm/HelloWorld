@@ -21,7 +21,8 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<script src="https://tonejs.github.io/build/Tone.js"></script>
+  <script src="https://tonejs.github.io/build/Tone.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	
@@ -39,9 +40,12 @@
                     <span>Select pitch</span>
                     <table>
                       <tr>
-                        <th><input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
-                        <th ><input type="radio" name="pitch" value="B" onclick="handlePitch(this);" checked>B</th>
-                        <th ><input type="radio" name="pitch" value="Cs" onclick="handlePitch(this);" >C#</th>
+                        <th><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="B" onclick="handlePitch(this);" checked>B</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="Cs" onclick="handlePitch(this);" >C#</th>
                       </tr>
                     </table> <br><br>
 
@@ -79,19 +83,25 @@
 
         // tanpura controls
         const tanPlayerB = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/Tanpura/B.wav",
-			loop: true
+			    url: "https://adheesh74mksm.github.io/Tanpura/B.wav",
+			    loop: true
         }).toDestination();
 
         const tanPlayerGs = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/Tanpura/Gs.wav",
-			loop: true
+			    url: "https://adheesh74mksm.github.io/Tanpura/Gs.wav",
+			    loop: true
         }).toDestination();
 
         const tanPlayerCs = new Tone.Player({
-			url: "https://adheesh74mksm.github.io/Tanpura/Cs.wav",
-			loop: true
+			    url: "https://adheesh74mksm.github.io/Tanpura/Cs.wav",
+			    loop: true
         }).toDestination();
+
+        Tone.Buffer.loaded().then(() => {
+          for(i of document.getElementsByTagName("i")) {
+            i.style.visibility = 'hidden';
+          }
+        });
 
         var tanPlayer = tanPlayerB;
 
