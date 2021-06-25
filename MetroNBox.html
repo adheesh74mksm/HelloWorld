@@ -11,9 +11,36 @@
         table {
           width: 80%;
           border-collapse: collapse;
-          border: 1px solid black;
+          border-radius:5px;
           margin-left:auto; 
           margin-right:auto;
+          border-style: hidden;
+          box-shadow: 0 0 0 1px black;
+        }
+
+        * {
+          font-size: 12.0pt;
+          font-family: raleway, sans-serif;
+        }
+
+        .logo {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 15%;
+          padding: 10px 10px 30px 10px;
+        }
+
+        .txt2, button {
+          font-size: 10.0pt;
+        }
+
+        .pitchSelect {
+          margin-top: 10px;
+        }
+
+        .noDisplay {
+          visibility: hidden;
         }
         </style>
   <meta charset="utf-8">
@@ -25,7 +52,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	
+    <div>
+      <img src="https://adheesh74mksm.github.io/Tanpura/mksmLogo.png" class="logo">
+    </div>
 		<div id="xyz">
             <table>
                 <tr>
@@ -34,11 +63,11 @@
                   <th >Controls</th>
                 </tr>
                 <tr>
-                  <td>Play Tanpura</td>
+                  <td>Tanpura</td>
                   <td ><button id="playTanpura" class="isPaused">Play</button></td>
                   <td >
-                    <span>Select pitch</span>
-                    <table>
+                    <span class="txt2">Pitch</span>
+                    <table class="pitchSelect">
                       <tr>
                         <th><i class="fa fa-refresh fa-spin"></i>
                           <input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
@@ -49,23 +78,23 @@
                       </tr>
                     </table> <br><br>
 
-                    <span>Volume</span><br>
+                    <span class="txt2">Volume</span><br>
                     <input type="range" id="tanVol" min="-30" max="-1" step="1"><br>
-                    <output id=tanVolDisplay name="tanVolDisplay" for="tanVol"></output> 
+                    <output id=tanVolDisplay name="tanVolDisplay" for="tanVol" class="noDisplay"></output> 
                     
                   </td>
                 </tr>
                 <tr>
-                  <td>Play Metronome</td>
+                  <td>Metronome</td>
                   <td ><button id="playMetronome" class="isPaused">Play</button></td>
                   <td >
-                    <span>Select speed</span>
-                    <input type="number" id="bpm" min="10" max="350" step="1"><br><br><br>
+                    <span class="txt2">Tempo</span>
+                    <input class="txt2" type="number" id="bpm" min="10" max="350" step="1"><br><br><br>
 
 
-                    <span>Volume</span><br>
+                    <span class="txt2">Volume</span><br>
                     <input type="range" id="metVol" min="-10" max="-1" step="1"><br>
-                    <output id=metVolDisplay name="metVolDisplay" for="metVol"></output> 
+                    <output id=metVolDisplay name="metVolDisplay" for="metVol" class="noDisplay"></output> 
 
                   </td>
                 </tr>
