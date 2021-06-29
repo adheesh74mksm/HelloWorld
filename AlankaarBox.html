@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        th, td {
+          border: 1px solid black;
+          padding: 15px;
+          text-align: center;
+        }
+        
+        table {
+          width: 80%;
+          border-collapse: collapse;
+          border-radius:5px;
+          margin-left:auto; 
+          margin-right:auto;
+          border-style: hidden;
+          box-shadow: 0 0 0 1px black;
+        }
+
+        * {
+          font-size: 12.0pt;
+          font-family: raleway, sans-serif;
+        }
+
+        .logo {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 15%;
+          padding: 10px 10px 30px 10px;
+        }
+
+        .txt2, button {
+          font-size: 10.0pt;
+        }
+
+        .pitchSelect {
+          margin-top: 10px;
+        }
+
+        .noDisplay {
+          visibility: hidden;
+        }
+
+        .alankaarRow{
+          height: 300px;
+          vertical-align: top;
+        }
+
+        .alnkrRad{
+          padding-right: 10px;
+          font-size: 10.0pt;
+        }
+
+        .alDynamicDisplayNoteSpace {
+          padding-right: 10px;
+        }
+        .alDynamicDisplayNote {
+          padding-right: 2px;
+        }
+        </style>
+  <meta charset="utf-8">
+	<title>AlankarBox</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <script src="https://tonejs.github.io/build/Tone.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div>
+      <img src="https://adheesh74mksm.github.io/Tanpura/mksmLogo.png" class="logo">
+    </div>
+		<div id="xyz">
+            <table>
+                <tr>
+                  <th colspan="3">Raag Jog</th>
+                </tr>
+                <tr>
+                  <th >Instrument</th>
+                  <th>Volume</th>
+                  <th >Controls</th>
+                </tr>
+                <tr>
+                  <td>Tanpura</td>
+                  <td >
+                    <input type="range" id="tanVol" min="-30" max="-1" step="1"><br>
+                    <output id=tanVolDisplay name="tanVolDisplay" for="tanVol" class="noDisplay"></output> 
+                  </td>
+                  <td >
+                    <span class="txt2">Pitch</span>
+                    <table class="pitchSelect">
+                      <tr>
+                        <th><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="B" onclick="handlePitch(this);" checked>B</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="Cs" onclick="handlePitch(this);" >C#</th>
+                      </tr>
+                    </table> <br><br>
+
+                    <button id="playTanpura" class="isPaused">Play</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Metronome</td>
+                  <td >
+                    <input type="range" id="metVol" min="-30" max="-1" step="1"><br>
+                    <output id=metVolDisplay name="metVolDisplay" for="metVol" class="noDisplay"></output> 
+                  </td>
+                  <td >
+                    <span class="txt2">Tempo</span><br><br>
+                    <input class="txt2" type="number" id="bpm" min="10" max="350" step="1"><br><br><br>
+
+                    <button id="playMetronome" class="isPaused">Play</button>
+
+
+                  </td>
+                </tr>
+                <tr class="alankaarRow">
+                  <td>Alankar</td>
+                  <td >
+                    <input type="range" id="alkrVol" min="-30" max="-1" step="1"><br>
+                    <output id=alkrVolDisplay name="alkrVolDisplay" for="alkrVol" class="noDisplay"></output> 
+                  </td>
+                  <td id="alankarCell">
+                    <span class="txt2">Select Alankar</span><br><br>
+                    <!-- br><input type="radio" name="alankarList" value="sps" onclick="handleAlankar(this);" checked>SPS<br -->
+                    <!-- span class="alnkrRad"><input type="radio" name="alankarList" value="cfa1" onclick="handleAlankar(this);" checked>CFA 1</span>      
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cfa2" onclick="handleAlankar(this);" >CFA 2 </span>        
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cfa3" onclick="handleAlankar(this);" >CFA 3  </span>       
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cfa4" onclick="handleAlankar(this);" >CFA 4 </span>        
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cfa5" onclick="handleAlankar(this);" >CFA 5 </span>        
+                    <br><br>
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cra2" onclick="handleAlankar(this);" >CRA 2 </span>        
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cra3" onclick="handleAlankar(this);" >CRA 3  </span>       
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="cra4" onclick="handleAlankar(this);" >CRA 4 </span>          
+                    <br><br>
+                    <span class="alnkrRad"><input type="radio" name="alankarList" value="pyramid" onclick="handleAlankar(this);" >Pyramid</span -->      
+                    
+
+                  </td>
+                </tr>
+                <tr>
+                  <td id="alDynamicDisplay"  colspan="3">
+                  </td>
+                </tr>
+              </table>
+
+
+           
+            
+			<!--tone-step-sequencer></tone-step-sequencer-->
+		</div>
+	
+
+
+	<script type="text/javascript">
+
+        // define tanpura play controls
+        const tanPlayerB = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/B.wav",
+			    loop: true
+        }).toDestination();
+
+        const tanPlayerGs = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/Gs.wav",
+			    loop: true
+        }).toDestination();
+
+        const tanPlayerCs = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/Cs.wav",
+			    loop: true
+        }).toDestination();
+
+        Tone.Buffer.loaded().then(() => {
+          for(i of document.getElementsByTagName("i")) {
+            i.style.visibility = 'hidden';
+          }
+        });
+
+        // define alankaar
+
+        const bass = new Tone.MonoSynth({
+          volume: -5,
+          envelope: {
+            attack: 0.1,
+            decay: 0.3,
+            release: 2,
+          },
+          filterEnvelope: {
+            attack: 0.001,
+            decay: 0.01,
+            sustain: 0.5,
+            baseFrequency: 200,
+            octaves: 2.6
+          }
+        }).toDestination();
+
+        const alankar = new Tone.Sequence(((time, note) => {
+          bass.triggerAttackRelease(note, "8n", time);
+        }), [], "4n").start(0);
+        var tanPlayer = tanPlayerB;
+        var basePitch = 123.47;
+
+        //define notes and alankar lists
+        const noteMultiple = {
+          "swar" : [
+            {"name" : "'M", value : 0.666},
+            {"name" : "'P", value : 0.75},
+            {"name" : "'n", value : 0.889},
+            {"name" : "S", value : 1},
+            {"name" : "g", value : 1.185},
+            {"name" : "G", value : 1.25},
+            {"name" : "M", value : 1.33},
+            {"name" : "P", value : 1.5},
+            {"name" : "n", value : 1.778},
+            {"name" : "S'", value : 2},
+            {"name" : "g'", value : 2.37},
+            {"name" : "M'", value : 2.666},
+            {"name" : "P'", value : 3},
+            {"name" : "-", value : 0.01}
+          ]
+        }
+        const alnkrJSON = {
+        "alankaars" : [
+          {"name": "cfa1", "display": "CForward 1", "text":["S","G","M","P","n","S'","-","-","nl","S'","n","P","M","g","S","-","-",]},
+          {"name": "cfa2", "display": "CForward 2", "text":["S","G","np","G","M","np","M","P","np","P","n","np","n","S'","-","-","nl"
+          ,"S'","n","np","n","P","np","P","M","np","M","g","np","g","S","-","-"]},
+          {"name": "cfa3", "display": "CForward 3", "text":["S","G","M","np","G","M","P","np","M","P","n","np","P","n","S'","-","nl"
+          ,"S'","n","P","np","n","P","M","np","P","M","G","np","M","g","S","-"]},
+          {"name": "cfa4", "display": "CForward 4", "text":["S","G","M","P","np","G","M","P","n","np","M","P","n","S'","-","-","nl"
+          ,"S'","n","P","M","np","n","P","M","G","np","P","M","g","S","-","-"]},
+          {"name": "cfa5", "display": "CForward 5", "text":["S","G","M","P","n","np","G","M","P","n","S'","-","nl"
+          ,"S'","n","P","M","G","np","n","P","M","g","S","-"]}, {"name":"newline"},
+
+          
+          {"name": "cra2", "display": "CReverse 2", "text":["g","S","np","M","G","np","P","M","np","n","P","np","S'","n","np","g'","S'","-","-","nl",
+          "n","S'","np","P","n","np","M","P","np","G","M","np","S","g","np","'n","S","-","-"]},
+          {"name": "cra3", "display": "CReverse 3", "text":["M","g","S","np","P","M","G","np","n","P","M","np","S'","n","P","np","g'","S'","n","np","M'","g'","S'","-","-","nl",
+          "P","n","S'","np","M","P","n","np","G","M","P","np","S","G","M","np","'n","S","g","np","'P","'n","S","-","-"]},
+          {"name": "cra4", "display": "CReverse 4", "text":["P","M","g","S","np","n","P","M","G","np","S'","n","P","M","np","g'","S'","n","P","np","M'","g'","S'","n","np","P'","M'","g'","S'","-","-","nl",
+          "M","P","n","S'","np","G","M","P","n","np","S","G","M","P","np","'n","S","G","M","np","'P","'n","S","g","np","'M","'P","'n","S","-","-"]}, {"name":"newline"},
+
+          
+          {"name": "pyramida", "display": "Pyramid - Aroha", "text":["S","np","S","g","S","np","S","G","M","g","S","nl","S","G","M","P","M","g","S","np","S","G","M",
+          "P", "n","P","M","g","S","nl","S","G","M", "P", "n", "S'", "n", "P","M","g","S","-","-"]},
+          {"name": "pyramidav", "display": "Pyramid - Avroha", "text":["S'","np","S'","n","S'","np","S'","n","P","n","S'","nl","S'","n","P","M","P","n","S'","np","S'","n","P",
+          "M", "G","M","P","n","S'","nl","S'","n","P","M","g","S","G","M","P","n","S'","-","-"]},  
+          {"name":"newline"},
+
+
+        ]
+        }
+
+
+        initTanPlayPause("playTanpura");
+
+        displayAlankar(alnkrJSON);
+
+        function displayAlankar(json){
+          var alankarCell = document.getElementById("alankarCell");
+          var checked = false;
+          for(let i=0; i < json.alankaars.length; i++){
+            if(json.alankaars[i].name == "newline"){
+              alankarCell.innerHTML +=  '<br><br>';
+            } else if (checked) {
+              alankarCell.innerHTML +=  '<span class="alnkrRad"><input type="radio" name="alankarList" value="'+ json.alankaars[i].name +'" onclick="handleAlankar(this);" > ' + json.alankaars[i].display + '</span>';
+            } else {
+              checked = true;
+              alankarCell.innerHTML +=  '<span class="alnkrRad"><input type="radio" name="alankarList" value="'+ json.alankaars[i].name +'" onclick="handleAlankar(this);" checked> ' + json.alankaars[i].display + '</span>';
+            }
+          }
+          handleAlankar4Pitch();
+        }
+
+        // metronome play controls
+        const metPlayer = new Tone.Player("https://adheesh74mksm.github.io/Tanpura/beat.wav")
+        .toDestination();
+
+        Tone.Transport.scheduleRepeat((time) => {
+            metPlayer.start(time);
+        }, "4n");
+		
+        initPlayPause("playMetronome",Tone.Transport);
+        
+        //metronome bpm controls
+        Tone.Transport.bpm.value = 150;
+        document.querySelector("#bpm").addEventListener("input", e => {
+        Tone.Transport.bpm.value = document.getElementById("bpm").value});
+        document.querySelector("#bpm").value = Tone.Transport.bpm.value;
+
+        //Volume controls
+
+
+        tanPlayer.volume.value = -15
+        document.querySelector("#tanVol").addEventListener("input", e => {tanPlayer.volume.value = document.getElementById("tanVol").value;
+        volumeUpdate("#tanVol","#tanVolDisplay",tanPlayer,31)
+        });
+        volumeUpdate("#tanVol","#tanVolDisplay",tanPlayer,31);
+
+        metPlayer.volume.value = -15
+        document.querySelector("#metVol").addEventListener("input", e => {metPlayer.volume.value = document.getElementById("metVol").value;
+        volumeUpdate("#metVol","#metVolDisplay",metPlayer,31);
+        });
+        volumeUpdate("#metVol","#metVolDisplay",metPlayer,31);
+
+        bass.volume.value = -15
+        document.querySelector("#alkrVol").addEventListener("input", e => {bass.volume.value = document.getElementById("alkrVol").value;
+        volumeUpdate("#alkrVol","#alkrVolDisplay",bass,31);
+        });
+        volumeUpdate("#alkrVol","#alkrVolDisplay",bass,31);
+
+
+
+        // Utils
+        function volumeUpdate(volId, dispId, player, adder){
+          document.querySelector(volId).value = player.volume.value;
+          document.querySelector(dispId).value = (player.volume.value + adder).toFixed(0);
+        }
+        
+        
+        function initPlayPause(buttonName,player){
+            document.getElementById(buttonName).addEventListener("click", e => {
+            buttonClicked = e.srcElement;
+            if(buttonClicked.className == 'isPlaying'){
+                buttonClicked.className = "isPaused";
+                buttonClicked.innerHTML = "Play";
+                player.stop();
+            } else if(buttonClicked.className == 'isPaused'){
+                buttonClicked.className = "isPlaying";
+                buttonClicked.innerHTML = "Pause";
+                Tone.start();
+                handleAlankar4Pitch();
+                player.start();
+            }
+        });
+        }
+
+                // Utils
+        function initTanPlayPause(buttonName){
+            document.getElementById(buttonName).addEventListener("click", e => {
+            buttonClicked = e.srcElement;
+            if(buttonClicked.className == 'isPlaying'){
+                buttonClicked.className = "isPaused";
+                buttonClicked.innerHTML = "Play";
+                tanPlayer.stop("+1.2");
+                tanPlayer.volume.rampTo(-Infinity, 3);
+            } else if(buttonClicked.className == 'isPaused'){
+                buttonClicked.className = "isPlaying";
+                buttonClicked.innerHTML = "Pause";
+                Tone.start();
+                tanPlayer.start();
+                tanPlayer.volume.rampTo(document.getElementById("tanVol").value,1);
+            }
+        });
+        }
+
+        function handlePitch(pitch){
+          tanPlayer.stop();
+          switch(pitch.value) {
+            case "B" : 
+            tanPlayer = tanPlayerB;
+            basePitch = 123.47;
+            break;
+            case "Gs" : 
+            tanPlayer = tanPlayerGs;
+            basePitch = 207.65;
+            break;            
+            case "Cs" : 
+            tanPlayer = tanPlayerCs;
+            basePitch = 138.59;
+            break;           
+            default:
+            tanPlayer = tanPlayerB;
+            basePitch = 123.47;
+          }
+          tanPlayer.volume.value = document.getElementById("tanVol").value;
+          if(document.getElementById("playTanpura").className == "isPlaying"){
+            tanPlayer.start();
+          }
+          handleAlankar4Pitch();
+        }
+        
+        function handleAlankar4Pitch() {
+          var alankarSet = document.getElementsByName('alankarList');
+          for(let i = 0; i < alankarSet.length; i++) {
+              if(alankarSet[i].checked) {
+                handleAlankar(alankarSet[i])
+              }
+          }
+        }
+
+        function handleAlankar(alnkrName){
+          currAlankar = [];
+          currAlankarDisplay = [];
+          for(let i=0; i < alnkrJSON.alankaars.length; i++){
+            if(alnkrJSON.alankaars[i].name == alnkrName.value){
+              console.log("found" + alnkrJSON.alankaars[i]);
+              currAlankar = alnkrJSON.alankaars[i].text.filter(removeNL).map(notate);
+              currAlankarDisplay = alnkrJSON.alankaars[i].text;
+            }
+          }
+          handleAlankarPitch(currAlankar);
+          handleAlankarRender(currAlankarDisplay);
+        }
+
+        function handleAlankarRender(currAlankarDisplay){
+          var alankarRenderCell = document.getElementById("alDynamicDisplay");
+          alankarRenderCell.innerHTML = '';
+          var j=0;
+          for(let i=0; i < currAlankarDisplay.length; i++){
+            if(currAlankarDisplay[i]=="nl"){
+              alankarRenderCell.innerHTML +=  '<br><br>';
+            } else if(currAlankarDisplay[i]=="np") {
+              alankarRenderCell.innerHTML +=  '<span class="alDynamicDisplayNoteSpace"></span>';
+            } else {
+              alankarRenderCell.innerHTML +=  '<span class="alDynamicDisplayNote" id="alankarRenderNote'+j+'">'+currAlankarDisplay[i]+'</span>';
+              j++;
+            }
+          }
+        }
+
+        function removeNL(noteText){
+          return (noteText != "nl" && noteText != "np");
+        }
+        
+        function notate(noteText){
+          for(let i=0; i < noteMultiple.swar.length; i++){
+            if(noteMultiple.swar[i].name == noteText){
+              return noteMultiple.swar[i].value;
+            }
+          }
+        }
+
+        function handleAlankarPitch(currAlankar){
+          
+          Tone.Transport.stop();
+          var noteSeq = currAlankar.map(value => { return value * basePitch + ""});
+          alankar.events = noteSeq;
+          if(document.getElementById("playMetronome").className == "isPlaying"){
+            Tone.Transport.start();
+          }
+        }
+	</script>
+</body>
+</html>
