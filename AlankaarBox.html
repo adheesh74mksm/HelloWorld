@@ -43,7 +43,7 @@
           visibility: hidden;
         }
 
-        .alankaarRow{
+        .alankaarRow, .alDynamicDisplayCell{
           height: 300px;
           vertical-align: top;
         }
@@ -56,8 +56,15 @@
         .alDynamicDisplayNoteSpace {
           padding-right: 10px;
         }
+
         .alDynamicDisplayNote {
           padding-right: 2px;
+          color: rgb(145, 145, 145);
+        }
+
+        .alDynamicDisplayNotePlayed {
+          padding-right: 2px;
+          color:rgb(55, 102, 255);
         }
         </style>
   <meta charset="utf-8">
@@ -144,7 +151,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td id="alDynamicDisplay"  colspan="3">
+                  <td id="alDynamicDisplay"  colspan="3" class="alDynamicDisplayCell">
                   </td>
                 </tr>
               </table>
@@ -201,6 +208,7 @@
 
         const alankar = new Tone.Sequence(((time, note) => {
           bass.triggerAttackRelease(note, "8n", time);
+          highlightNote();
         }), [], "4n").start(0);
         var tanPlayer = tanPlayerB;
         var basePitch = 123.47;
@@ -254,6 +262,9 @@
 
         ]
         }
+
+        var currAlankarNoteIndex = 0;
+        var maxAlankarNoteIndex = 0;
 
 
         initTanPlayPause("playTanpura");
@@ -420,6 +431,22 @@
               alankarRenderCell.innerHTML +=  '<span class="alDynamicDisplayNote" id="alankarRenderNote'+j+'">'+currAlankarDisplay[i]+'</span>';
               j++;
             }
+          }
+          currAlankarNoteIndex = 0;
+          maxAlankarNoteIndex = j;
+        }
+
+
+        function highlightNote(){
+          var noteToHighlight = document.getElementById("alankarRenderNote" + currAlankarNoteIndex);
+          noteToHighlight.className = "alDynamicDisplayNotePlayed";
+          currAlankarNoteIndex ++;
+          if(currAlankarNoteIndex==maxAlankarNoteIndex){
+            for(let i = 0; i < maxAlankarNoteIndex; i++){
+              var noteToNormal = document.getElementById("alankarRenderNote" + i);
+              noteToNormal.className = "alDynamicDisplayNote";
+            }
+            currAlankarNoteIndex=0;
           }
         }
 
