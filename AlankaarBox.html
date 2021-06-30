@@ -35,6 +35,10 @@
           font-size: 10.0pt;
         }
 
+        .txt3 {
+          font-size: 8.0pt;
+        }
+
         .pitchSelect {
           margin-top: 10px;
         }
@@ -121,7 +125,8 @@
                     <span class="txt2">Tempo</span><br><br>
                     <input class="txt2" type="number" id="bpm" min="10" max="350" step="1"><br><br><br>
 
-                    <button id="playMetronome" class="isPaused">Play</button>
+                    <button id="playMetronome" class="isPaused">Play</button><br><br>
+                    <span class="txt2">This section controls the tempo and play/pause for both metronome and alankar</span><br><br>
 
 
                   </td>
@@ -227,6 +232,7 @@
             {"name" : "n", value : 1.778},
             {"name" : "S'", value : 2},
             {"name" : "g'", value : 2.37},
+            {"name" : "G'", value : 2.5},
             {"name" : "M'", value : 2.666},
             {"name" : "P'", value : 3},
             {"name" : "-", value : 0.01}
@@ -259,6 +265,28 @@
           "M", "G","M","P","n","S'","nl","S'","n","P","M","g","S","G","M","P","n","S'","-","-"]},  
           {"name":"newline"},
 
+          {"name": "palta1", "display": "Palta 1", 
+          "text":[
+            "'n","S","G","M","P","n","S'","-","np","S'","n","P","M","G","M","g","S","nl",
+            "'n","S","G","M","P","n","S'","-","np","S'","n","P","M","G","M","g","S","nl",
+            "'n","S","G","M","P","n","S'","n","np","S'","n","P","M","G","M","g","S","nl",
+            "'n","S","G","M","P","n","S'","n","np","S'","n","P","M","G","M","g","S","nl",
+            "'n","S","G","M","P","n","S'","g'","S'","n","P","M","G","M","g","S","nl",
+            "'n","S","G","M","P","n","S'","g'","S'","n","P","M","G","M","g","S","nl",
+            "-","-","-","-","-","-","-","-"]}, 
+
+          {"name": "palta2", "display": "Palta 2", 
+          "text":[ 
+              "M","G","M","G","M","M","g","S","np","G","M","P","G","M","M","g","S","nl",
+              "G","M","P","n","P","M","G","M","np","G","M","P","G","M","M","g","S","nl",
+              "'n","S","G","M","P","n","S'","n","P","M","np","G","M","P","n","P","M","nl",
+              "G","M","P","n","P","M","G","M","np","G","M","P","G","M","M","g","S","nl",
+              "G","M","P","n","S'","g'","S'","n","P","M","np","P","n","S'","n","P","M","nl",
+              "G","M","P","n","P","M","G","M","np","G","M","P","G","M","M","g","S","nl",
+              "M","G","M","G","M","M","g","S","np","S'","n","S'","n","S'","S'","n","P","nl",
+              "M'","G'","M'","G'","M'","M'","g'","S'","n","P","M","G","nl",
+              "S","G","M","P","n","S'","g'","S'","n","P","M","P","np","G","M","P","G","M","M","g","S","nl",
+              "-","-","-","-","-","-","-","-"]},
 
         ]
         }
