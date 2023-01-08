@@ -66,15 +66,35 @@
                   <td>Tanpura</td>
                   <td ><button id="playTanpura" class="isPaused">Play</button></td>
                   <td >
-                    <span class="txt2">Pitch</span>
                     <table class="pitchSelect">
                       <tr>
+                        <th>Pa tanpura</th>
                         <th><i class="fa fa-refresh fa-spin"></i>
-                          <input type="radio" name="pitch" value="Gs" onclick="handlePitch(this);" >G#</th>
+                          <input type="radio" name="pitch" value="PGs" onclick="handlePitch(this);" >G#</th>
                         <th ><i class="fa fa-refresh fa-spin"></i>
-                          <input type="radio" name="pitch" value="B" onclick="handlePitch(this);" checked>B</th>
+                          <input type="radio" name="pitch" value="PB" onclick="handlePitch(this);" checked>B</th>
                         <th ><i class="fa fa-refresh fa-spin"></i>
-                          <input type="radio" name="pitch" value="Cs" onclick="handlePitch(this);" >C#</th>
+                          <input type="radio" name="pitch" value="PCs" onclick="handlePitch(this);" >C#</th>
+                      </tr>
+
+                      <tr>
+                        <th>Ma tanpura</th>
+                        <th><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="MGs" onclick="handlePitch(this);" >G#</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="MB" onclick="handlePitch(this);" >B</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="MCs" onclick="handlePitch(this);" >C#</th>
+                      </tr>
+
+                      <tr>
+                        <th>Teevra Ma tanpura</th>
+                        <th><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="TMGs" onclick="handlePitch(this);" >G#</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="TMB" onclick="handlePitch(this);" >B</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="TMCs" onclick="handlePitch(this);" >C#</th>
                       </tr>
                     </table> <br><br>
 
@@ -111,19 +131,49 @@
 	<script type="text/javascript">
 
         // tanpura controls
-        const tanPlayerB = new Tone.Player({
+        const tanPlayerPB = new Tone.Player({
 			    url: "https://adheesh74mksm.github.io/Tanpura/B.wav",
 			    loop: true
         }).toDestination();
 
-        const tanPlayerGs = new Tone.Player({
+        const tanPlayerPGs = new Tone.Player({
 			    url: "https://adheesh74mksm.github.io/Tanpura/Gs.wav",
 			    loop: true
         }).toDestination();
 
-        const tanPlayerCs = new Tone.Player({
+        const tanPlayerPCs = new Tone.Player({
 			    url: "https://adheesh74mksm.github.io/Tanpura/Cs.wav",
 			    loop: true
+        }).toDestination();
+
+        const tanPlayerMB = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/B-M.wav",
+			    loop: true
+        }).toDestination();
+
+        const tanPlayerMGs = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/G-M.wav",
+			    loop: true
+        }).toDestination();
+
+        const tanPlayerMCs = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/C-M.wav",
+			    loop: true
+        }).toDestination();
+
+        const tanPlayerTMB = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/B-TM.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerTMGs = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/G-TM.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerTMCs = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/C-TM.wav",
+          loop: true
         }).toDestination();
 
         Tone.Buffer.loaded().then(() => {
@@ -132,7 +182,7 @@
           }
         });
 
-        var tanPlayer = tanPlayerB;
+        var tanPlayer = tanPlayerPB;
 
         tanPlayer.volume.value = -6
         document.querySelector("#tanVol").addEventListener("input", e => {tanPlayer.volume.value = document.getElementById("tanVol").value;
@@ -205,17 +255,35 @@
         function handlePitch(pitch){
           tanPlayer.stop();
           switch(pitch.value) {
-            case "B" : 
-            tanPlayer = tanPlayerB;
+            case "PB" : 
+            tanPlayer = tanPlayerPB;
             break;
-            case "Gs" : 
-            tanPlayer = tanPlayerGs;
+            case "PGs" : 
+            tanPlayer = tanPlayerPGs;
             break;            
-            case "Cs" : 
-            tanPlayer = tanPlayerCs;
-            break;           
+            case "PCs" : 
+            tanPlayer = tanPlayerPCs;
+            break;     
+            case "MB" : 
+            tanPlayer = tanPlayerMB;
+            break;
+            case "MGs" : 
+            tanPlayer = tanPlayerMGs;
+            break;            
+            case "MCs" : 
+            tanPlayer = tanPlayerMCs;
+            break;     
+            case "TMB" : 
+            tanPlayer = tanPlayerTMB;
+            break;
+            case "TMGs" : 
+            tanPlayer = tanPlayerTMGs;
+            break;            
+            case "TMCs" : 
+            tanPlayer = tanPlayerTMCs;
+            break;          
             default:
-            tanPlayer = tanPlayerB;
+            tanPlayer = tanPlayerPB;
           }
           tanPlayer.volume.value = document.getElementById("tanVol").value;
           if(document.getElementById("playTanpura").className == "isPlaying"){
