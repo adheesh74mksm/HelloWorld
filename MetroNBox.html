@@ -75,6 +75,8 @@
                           <input type="radio" name="pitch" value="PB" onclick="handlePitch(this);" checked>B</th>
                         <th ><i class="fa fa-refresh fa-spin"></i>
                           <input type="radio" name="pitch" value="PCs" onclick="handlePitch(this);" >C#</th>
+                          <th ><i class="fa fa-refresh fa-spin"></i>
+                            <input type="radio" name="pitch" value="PD" onclick="handlePitch(this);" >D</th>
                       </tr>
 
                       <tr>
@@ -85,6 +87,8 @@
                           <input type="radio" name="pitch" value="MB" onclick="handlePitch(this);" >B</th>
                         <th ><i class="fa fa-refresh fa-spin"></i>
                           <input type="radio" name="pitch" value="MCs" onclick="handlePitch(this);" >C#</th>
+                          <th ><i class="fa fa-refresh fa-spin"></i>
+                            <input type="radio" name="pitch" value="MD" onclick="handlePitch(this);" >D</th>
                       </tr>
 
                       <tr>
@@ -95,6 +99,8 @@
                           <input type="radio" name="pitch" value="TMB" onclick="handlePitch(this);" >B</th>
                         <th ><i class="fa fa-refresh fa-spin"></i>
                           <input type="radio" name="pitch" value="TMCs" onclick="handlePitch(this);" >C#</th>
+                          <th ><i class="fa fa-refresh fa-spin"></i>
+                            <input type="radio" name="pitch" value="TMD" onclick="handlePitch(this);" >D</th>
                       </tr>
                     </table> <br><br>
 
@@ -146,6 +152,12 @@
 			    loop: true
         }).toDestination();
 
+
+        const tanPlayerPD = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/D-P.wav",
+			    loop: true
+        }).toDestination();
+
         const tanPlayerMB = new Tone.Player({
 			    url: "https://adheesh74mksm.github.io/Tanpura/B-M.wav",
 			    loop: true
@@ -158,6 +170,11 @@
 
         const tanPlayerMCs = new Tone.Player({
 			    url: "https://adheesh74mksm.github.io/Tanpura/C-M.wav",
+			    loop: true
+        }).toDestination();        
+        
+        const tanPlayerMD = new Tone.Player({
+			    url: "https://adheesh74mksm.github.io/Tanpura/D-M.wav",
 			    loop: true
         }).toDestination();
 
@@ -173,6 +190,11 @@
 
         const tanPlayerTMCs = new Tone.Player({
           url: "https://adheesh74mksm.github.io/Tanpura/C-TM.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerTMD = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/D-TM.wav",
           loop: true
         }).toDestination();
 
@@ -263,6 +285,9 @@
             break;            
             case "PCs" : 
             tanPlayer = tanPlayerPCs;
+            break;            
+            case "PD" : 
+            tanPlayer = tanPlayerPD;
             break;     
             case "MB" : 
             tanPlayer = tanPlayerMB;
@@ -273,6 +298,9 @@
             case "MCs" : 
             tanPlayer = tanPlayerMCs;
             break;     
+            case "MD" : 
+            tanPlayer = tanPlayerMD;
+            break;
             case "TMB" : 
             tanPlayer = tanPlayerTMB;
             break;
@@ -281,7 +309,10 @@
             break;            
             case "TMCs" : 
             tanPlayer = tanPlayerTMCs;
-            break;          
+            break; 
+            case "TMD" : 
+            tanPlayer = tanPlayerTMD;
+            break;         
             default:
             tanPlayer = tanPlayerPB;
           }
