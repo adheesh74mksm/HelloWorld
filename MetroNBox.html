@@ -102,6 +102,20 @@
                           <th ><i class="fa fa-refresh fa-spin"></i>
                             <input type="radio" name="pitch" value="TMD" onclick="handlePitch(this);" >D</th>
                       </tr>
+
+
+
+                      <tr>
+                        <th>Ni tanpura (in works)</th>
+                        <th><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="NGs" onclick="handlePitch(this);" >G#</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="NB" onclick="handlePitch(this);" >B</th>
+                        <th ><i class="fa fa-refresh fa-spin"></i>
+                          <input type="radio" name="pitch" value="NCs" onclick="handlePitch(this);" >C#</th>
+                          <th ><i class="fa fa-refresh fa-spin"></i>
+                            <input type="radio" name="pitch" value="ND" onclick="handlePitch(this);" >D</th>
+                      </tr>
                     </table> <br><br>
 
                     <span class="txt2">Volume</span><br>
@@ -195,6 +209,26 @@
 
         const tanPlayerTMD = new Tone.Player({
           url: "https://adheesh74mksm.github.io/Tanpura/D-TM.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerNB = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/B-N.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerNGs = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/G-N.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerNCs = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/C-N.wav",
+          loop: true
+        }).toDestination();
+
+        const tanPlayerND = new Tone.Player({
+          url: "https://adheesh74mksm.github.io/Tanpura/D-N.wav",
           loop: true
         }).toDestination();
 
@@ -312,7 +346,19 @@
             break; 
             case "TMD" : 
             tanPlayer = tanPlayerTMD;
-            break;         
+            break;
+            case "NB" : 
+            tanPlayer = tanPlayerNB;
+            break;
+            case "NGs" : 
+            tanPlayer = tanPlayerNGs;
+            break;            
+            case "NCs" : 
+            tanPlayer = tanPlayerNCs;
+            break; 
+            case "ND" : 
+            tanPlayer = tanPlayerND;
+            break;                  
             default:
             tanPlayer = tanPlayerPB;
           }
